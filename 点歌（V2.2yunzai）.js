@@ -1,9 +1,7 @@
-//搜索并分享网易歌曲，使用方法发送#点歌 歌曲名 歌手
+//搜索并分享歌曲，使用方法发送#点歌 歌曲名 歌手
 import fetch from "node-fetch";
 import { segment } from "oicq";
-//简单应用示例
 
-//1.定义命令规则
 export const rule = {
   shareMusic: {
     reg: "^[非VIP]*点歌(.*)$", //匹配消息正则，命令正则
@@ -13,15 +11,10 @@ export const rule = {
 };
 const urlList = {
   qq: "http://150.158.140.48:3200/getSmartbox?key=paramsSearch",
-  //"https://c.y.qq.com/soso/fcgi-bin/music_search_new_platform?searchid=53806572956004615&t=1&aggr=1&cr=1&catZhida=1&lossless=0&flag_qc=0&p=1&format=json&n=5&w=paramsSearch",
-  //"https://c.y.qq.com/soso/fcgi-bin/client_search_cp?g_tk=5381&p=1&n=20&w=paramsSearch&format=json&loginUin=0&hostUin=0&inCharset=utf8&outCharset=utf-8&notice=0&platform=yqq&needNewCode=0&remoteplace=txt.yqq.song&t=0&aggr=1&cr=1&catZhida=1&flag_qc=0",
   kugou: "http://mobilecdn.kugou.com/api/v3/search/song?format=json&keyword=paramsSearch&page=1&pagesize=20&showtype=1",
   wangyiyun: "http://150.158.140.48:3000/cloudsearch?keywords=paramsSearch",
-  	//"https://autumnfish.cn/search?keywords=paramsSearch",
 };
-//2.编写功能方法
-//方法名字与rule中的sample保持一致
-//测试命令 npm test 示例
+
 export async function shareMusic(e) {
   //e.msg 用户的命令消息
   let msg = e.msg.replace(/\s*/g,"")
@@ -43,7 +36,6 @@ export async function shareMusic(e) {
     let url = urlList[apiName].replace("paramsSearch", msg);
     let response = await fetch(url);//调用接口获取数据
     console.log(`${url}`);
-    //e.reply(`${url}`);
     let res = await response.json();//结果json字符串转对象
     let songList = [];
     if (isKugou)
@@ -79,5 +71,5 @@ export async function shareMusic(e) {
   } catch (error) {
     console.log(error);
   }
-  return true; //返回true 阻挡消息不再往下
+  return true;
 }
