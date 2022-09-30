@@ -1,16 +1,12 @@
-//搜索并分享网易歌曲，使用方法发送#点歌 歌曲名 歌手
+//搜索并分享歌曲，使用方法发送#点歌 歌曲名 歌手
 import { segment } from "oicq";
 import fetch from "node-fetch";
 import plugin from '../../lib/plugins/plugin.js'
-//简单应用示例
 console.log(`触发点歌.js`);
 const urlList = {
   qq: "http://150.158.140.48:3200/getSmartbox?key=paramsSearch",
-  //"https://c.y.qq.com/soso/fcgi-bin/music_search_new_platform?searchid=53806572956004615&t=1&aggr=1&cr=1&catZhida=1&lossless=0&flag_qc=0&p=1&format=json&n=5&w=paramsSearch",
-  //"https://c.y.qq.com/soso/fcgi-bin/client_search_cp?g_tk=5381&p=1&n=20&w=paramsSearch&format=json&loginUin=0&hostUin=0&inCharset=utf8&outCharset=utf-8&notice=0&platform=yqq&needNewCode=0&remoteplace=txt.yqq.song&t=0&aggr=1&cr=1&catZhida=1&flag_qc=0",
   kugou: "http://mobilecdn.kugou.com/api/v3/search/song?format=json&keyword=paramsSearch&page=1&pagesize=20&showtype=1",
   wangyiyun: "http://150.158.140.48:3000/cloudsearch?keywords=paramsSearch",
-  	//"https://autumnfish.cn/search?keywords=paramsSearch",
 };
 export class example extends plugin {
   constructor () {
@@ -19,7 +15,7 @@ export class example extends plugin {
       dsc: 'shareMusic',
       event: 'message',
       priority: 500,
-      rule: [//1.定义命令规则
+      rule: [
         {
           reg: '^[非VIP]*点歌(.*)$',
           fnc: 'shareMusic'
@@ -27,9 +23,7 @@ export class example extends plugin {
       ]
     })
   }
-//2.编写功能方法
-//方法名字与rule中的sample保持一致
-//测试命令 npm test 示例
+
 async shareMusic (e) {
   //e.msg 用户的命令消息
   let msg = e.msg.replace(/\s*/g,"")
@@ -43,7 +37,7 @@ async shareMusic (e) {
   let isPay = msg.includes("非VIP");
   if (isPay) console.log('什么！这个穷鬼点非VIP？？？')
   msg = msg.replace(/[非VIP|点歌|qq|QQ|kugou|kg|酷狗|网易云|网抑云|网易|163]/g, "");
-  console.log("这个崽种在搜", msg);
+  console.log("这个b在搜", msg);
   try {
     msg = encodeURI(msg);
     const params = { search: msg };
@@ -87,6 +81,6 @@ async shareMusic (e) {
   } catch (error) {
     console.log(error);
   }
-  return true; //返回true 阻挡消息不再往下
+  return true;
 }
 }
