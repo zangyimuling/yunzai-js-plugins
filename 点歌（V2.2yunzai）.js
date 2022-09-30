@@ -4,9 +4,9 @@ import { segment } from "oicq";
 
 export const rule = {
   shareMusic: {
-    reg: "^[非VIP]*点歌(.*)$", //匹配消息正则，命令正则
+    reg: "^[非VIP]*点歌(.*)$",
     priority: 5000, //优先级，越小优先度越高
-    describe: "【#示例】开发简单示例演示", //【命令】功能说明
+    describe: "点歌",
   },
 };
 const urlList = {
