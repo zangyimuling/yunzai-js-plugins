@@ -7,4 +7,5 @@
 
 
 V3的塞到/Yunzai-Bot-main/plugins/example再重启机器人下面就行
+
 V2的塞到/Yunzai-Bot-main/lib/example下面就行
