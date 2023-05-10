@@ -11,3 +11,4 @@ V3的塞到/Yunzai-Bot-main/plugins/example再重启机器人下面就行
 V2的塞到/Yunzai-Bot-main/lib/example下面就行
 
 COS接口寄了,仓库作废！！！
+音乐接口是自己的，服务器到期了，寄！！！！！！
